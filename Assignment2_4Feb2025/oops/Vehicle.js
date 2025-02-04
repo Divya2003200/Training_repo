@@ -14,7 +14,7 @@ calculateRentalCost(days){
 class Car extends Vehicle{
     calculateRentalCost(days){
         console.log("Rent for car is")
-        return this.rentPricePerDay*days
+       return super.calculateRentalCost(days);
      }
 }
 
@@ -22,14 +22,14 @@ class Bike extends Vehicle{
     
     calculateRentalCost(days){
         console.log("Rent for Bike is")
-        return this.rentPricePerDay*days
+       return super.calculateRentalCost(days);
      }
 }
 
 class Truck extends Vehicle{
     calculateRentalCost(days){
         console.log("Rent for Truck is")
-        return this.rentPricePerDay*days
+      return super.calculateRentalCost(days);
      }
 }
 
