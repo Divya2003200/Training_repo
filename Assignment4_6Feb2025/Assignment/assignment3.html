@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Leak Simulation</title>
+</head>
+<body>
+    <button id="start">Start Leak</button>
+    <button id="stop">Fix Memory Leak</button>
+
+    <script>
+        let memoryLeakArray = [];
+        let interval = null;
+
+        function simulateMemoryLeak() {
+            if (!interval) {
+                interval = setInterval(() => {
+                    memoryLeakArray.push(new Array(1000000).fill(0)); // Add large arrays
+                    console.log("Memory growing:", memoryLeakArray.length);
+                }, 1000);
+            }
+        }
+
+        function cleanupMemory() {
+            clearInterval(interval);  // Stop adding more memory
+            interval = null;
+            memoryLeakArray = [];     // Free up memory
+            console.log("Memory cleaned up!");
+        }
+
+        document.getElementById("start").addEventListener("click", simulateMemoryLeak);
+        document.getElementById("stop").addEventListener("click", cleanupMemory);
+    </script>
+</body>
+</html>
