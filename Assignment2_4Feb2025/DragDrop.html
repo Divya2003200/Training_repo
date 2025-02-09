@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Drag and Drop</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        ul { list-style: none; padding: 0; width: 200px; margin: auto; border: 2px solid #ddd; padding: 10px; }
+        li {
+            padding: 10px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            cursor: grab;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Drag and Drop List</h2>
+    <ul id="list">
+        <li draggable="true">Hey</li>
+        <li draggable="true">Welcome</li>
+        <li draggable="true">Hii</li>
+    </ul>
+
+    <script>
+        let draggedItem = null;
+
+        document.querySelectorAll("li").forEach(item => {
+            item.addEventListener("dragstart", () => draggedItem = item);
+            item.addEventListener("dragover", (e) => e.preventDefault());
+            item.addEventListener("drop", (e) => {
+                let list = document.getElementById("list");
+                let rect = item.getBoundingClientRect();
+                let offset = e.clientY - rect.top;
+                
+                if (offset < rect.height / 2) {
+                    list.insertBefore(draggedItem, item);
+                } else {
+                    list.insertBefore(draggedItem, item.nextSibling);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
